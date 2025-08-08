@@ -1,0 +1,106 @@
+<div class="form-container">
+    <h2><i class="fas fa-plus-circle"></i> Crear Nuevo Curso</h2>
+
+    <form [formGroup]="cursoForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="nombre"><i class="fas fa-book"></i> Nombre del Curso</label>
+            <input type="text" id="nombre" formControlName="nombre" class="form-control">
+            @if (cursoForm.get('nombre')?.invalid && cursoForm.get('nombre')?.touched) {
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> El nombre es requerido (mínimo 5 caracteres)
+            </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion"><i class="fas fa-align-left"></i> Descripción</label>
+            <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="4"></textarea>
+            @if (cursoForm.get('descripcion')?.invalid && cursoForm.get('descripcion')?.touched) {
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> La descripción es requerida (mínimo 20 caracteres)
+            </div>
+            }
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="duracion"><i class="fas fa-clock"></i> Duración (horas)</label>
+                <input type="number" id="duracion" formControlName="duracion" class="form-control">
+                @if (cursoForm.get('duracion')?.invalid && cursoForm.get('duracion')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> La duración debe ser al menos 1 hora
+                </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="fechaInicio"><i class="fas fa-calendar-alt"></i> Fecha de Inicio</label>
+                <input type="date" id="fechaInicio" formControlName="fechaInicio" class="form-control">
+                @if (cursoForm.get('fechaInicio')?.invalid && cursoForm.get('fechaInicio')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> La fecha de inicio es requerida
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="categoria"><i class="fas fa-tag"></i> Categoría</label>
+                <select id="categoria" formControlName="categoria" class="form-control">
+                    <option value="">Seleccione una categoría</option>
+                    <option value="Desarrollo Web">Desarrollo Web</option>
+                    <option value="Ciencia de Datos">Ciencia de Datos</option>
+                    <option value="Diseño UX/UI">Diseño UX/UI</option>
+                    <option value="Marketing Digital">Marketing Digital</option>
+                </select>
+                @if (cursoForm.get('categoria')?.invalid && cursoForm.get('categoria')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> La categoría es requerida
+                </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="instructor"><i class="fas fa-chalkboard-teacher"></i> Instructor</label>
+                <input type="text" id="instructor" formControlName="instructor" class="form-control">
+                @if (cursoForm.get('instructor')?.invalid && cursoForm.get('instructor')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> El instructor es requerido
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="imagenUrl"><i class="fas fa-image"></i> URL de la Imagen</label>
+            <input type="text" id="imagenUrl" formControlName="imagenUrl" class="form-control">
+            @if (cursoForm.get('imagenUrl')?.invalid && cursoForm.get('imagenUrl')?.touched) {
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> La URL de la imagen no es válida
+            </div>
+            }
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary" [disabled]="cursoForm.invalid">
+                <i class="fas fa-save"></i> Guardar Curso
+            </button>
+            <button type="button" routerLink="/cursos" class="btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+
+        @if (successMessage) {
+        <div class="success-message">
+            <i class="fas fa-check-circle"></i> {{ successMessage }}
+        </div>
+        }
+
+        @if (errorMessage) {
+        <div class="error-message-server">
+            <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+        </div>
+        }
+    </form>
+</div>

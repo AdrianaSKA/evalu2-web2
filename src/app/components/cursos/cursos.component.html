@@ -1,0 +1,41 @@
+<section class="cursos-container">
+    <div class="cursos-header">
+        <h2 class="section-title">Nuestros Cursos</h2>
+        @if (isAuthenticated) {
+        <button class="add-curso-btn" [routerLink]="['/crear-curso']">
+            <i class="fas fa-plus"></i> Crear Nuevo Curso
+        </button>
+        }
+    </div>
+
+    <div class="cursos-grid">
+        @for (curso of cursos; track curso.id) {
+        <div class="curso-card">
+            <div class="curso-imagen">
+                <img [src]="curso.imagenUrl || 'assets/default-course.jpg'" [alt]="curso.nombre">
+                @if (curso.nuevo) {
+                <div class="curso-badge">Nuevo</div>
+                }
+            </div>
+            <div class="curso-info">
+                <h3>{{ curso.nombre}}</h3>
+                <p class="curso-desc">{{ curso.descripcion }}</p>
+                <div class="curso-meta">
+                    <span><i class="fas fa-clock"></i> {{ curso.duracion }}</span>
+                    <span><i class="fas fa-user-tie"></i> {{ curso.instructor }}</span>
+                    <span><i class="fas fa-calendar-alt"></i> {{ curso.fechaInicio | date:'mediumDate' }}</span>
+                </div>
+                <div class="curso-actions">
+                    @if (isAuthenticated) {
+                    <button class="edit-btn" [routerLink]="['/editar-curso', curso.id]">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    }
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <p class="no-cursos">No hay cursos disponibles</p>
+        }
+    </div>
+</section>

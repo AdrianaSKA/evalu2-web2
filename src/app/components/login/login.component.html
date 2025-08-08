@@ -1,0 +1,29 @@
+<div class="login-container">
+    <form (ngSubmit)="login()" class="login-form">
+        <div class="form-group">
+            <label for="usuario" class="form-label">
+                <i class="fas fa-user"></i> Usuario
+            </label>
+            <input [(ngModel)]="usuario" name="usuario" type="text" id="usuario" class="form-input"
+                placeholder="Ingrese su usuario" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">
+                <i class="fas fa-lock"></i> Contraseña
+            </label>
+            <input [(ngModel)]="password" name="password" type="password" id="password" class="form-input"
+                placeholder="Ingrese su contraseña" required>
+        </div>
+
+        <button type="submit" class="login-button">
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+        </button>
+
+        @if (error) {
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i> {{error}}
+        </div>
+        }
+    </form>
+</div>

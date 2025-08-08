@@ -1,0 +1,64 @@
+<div class="registro-container">
+    <div class="registro-card">
+        <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
+
+        <form [formGroup]="registroForm" (ngSubmit)="registrar()">
+            <div class="form-group">
+                <label for="nombre"><i class="fas fa-user"></i> Nombre Completo</label>
+                <input type="text" id="nombre" formControlName="nombre" class="form-control">
+                @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> El nombre es requerido
+                </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
+                <input type="email" id="email" formControlName="email" class="form-control">
+                @if (registroForm.get('email')?.invalid && registroForm.get('email')?.touched) {
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> Por favor ingrese un correo válido
+                </div>
+                }
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="password" formControlName="password" class="form-control">
+                    @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> Mínimo 6 caracteres
+                    </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword"><i class="fas fa-lock"></i> Confirmar Contraseña</label>
+                    <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+                    @if (registroForm.get('confirmPassword')?.invalid && registroForm.get('confirmPassword')?.touched) {
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> Las contraseñas deben coincidir
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary" [disabled]="registroForm.invalid">
+                    <i class="fas fa-user-plus"></i> Registrarse
+                </button>
+                <button type="button" routerLink="/login" class="btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+            </div>
+
+            @if (errorMessage) {
+            <div class="error-message-server">
+                <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+            </div>
+            }
+        </form>
+    </div>
+</div>
